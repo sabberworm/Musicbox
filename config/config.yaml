@@ -21,5 +21,6 @@ indexer:
 webapp:
   number_of_votes: 10
   port: 8080
+  session_secret: 'my_session_secret'
   authentication: 
     module: ldap

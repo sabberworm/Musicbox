@@ -25,15 +25,15 @@
 	var votesText = [CPTextField hudLabelWithTitle:"unknown"];
 	[votesText setFrameOrigin:CGPointMake(120, 30)];
 	
-  resetButton = [[CPButton alloc] initWithFrame:CGRectMake(40, 60, 0, 0)];
-  [resetButton setTitle:"Reset My Votes"];
-  [resetButton setTarget:self];
-  [resetButton setAction:@selector(resetVotes)];
-  [resetButton setBezelStyle: CPHUDBezelStyle];
-  [resetButton setHidden:YES];
-  [resetButton sizeToFit];
+	resetButton = [[CPButton alloc] initWithFrame:CGRectMake(40, 60, 0, 0)];
+	[resetButton setTitle:"Reset My Votes"];
+	[resetButton setTarget:self];
+	[resetButton setAction:@selector(resetVotes)];
+	[resetButton setBezelStyle: CPHUDBezelStyle];
+	[resetButton setHidden:YES];
+	[resetButton sizeToFit];
 
-  [contentView addSubview:resetButton];
+	[contentView addSubview:resetButton];
 	[contentView addSubview:votesLabel];
 	[contentView addSubview:votesText];
 	[contentView addSubview:resetButton];
@@ -42,8 +42,8 @@
 }
 
 -(void) activate {
-  [resetButton setHidden:NO];
-  [self update];
+	[resetButton setHidden:NO];
+	[self update];
 }
 
 - (void) update {

@@ -20,32 +20,30 @@ var loginControllerSharedInstance = nil;
 }
 
 + (LoginController)sharedLoginController
-{	
-    if (loginControllerSharedInstance == nil)
-    {
-        loginControllerSharedInstance = [[LoginController alloc] init];
-    }
-    
-    return loginControllerSharedInstance;
+{ 
+	if (loginControllerSharedInstance == nil) {
+		loginControllerSharedInstance = [[LoginController alloc] init];
+	}
+	
+	return loginControllerSharedInstance;
 }
 
 - (void)showLoginWindow:(id)sender
 {
 	appController = sender;
-    [CPApp runModalForWindow:[self window]];
+	[CPApp runModalForWindow:[self window]];
 }
 
 - (id)init
 {
 	// Create the login window
-    var theWindow = [[CPPanel alloc] initWithContentRect:CGRectMake(100,100,320,160) styleMask: CPTitledWindowMask|CPTitledWindowMask];
-    self = [super initWithWindow:theWindow];
-    if (self)
-    {
+	var theWindow = [[CPPanel alloc] initWithContentRect:CGRectMake(100,100,320,160) styleMask: CPTitledWindowMask|CPTitledWindowMask];
+	self = [super initWithWindow:theWindow];
+	if (self) {
 		[theWindow setTitle:@"Login"];
 		[theWindow setLevel:CPModalPanelWindowLevel];
-        
-        [theWindow setDelegate:self];
+				
+		[theWindow setDelegate:self];
 
 		var contentView = [theWindow contentView];
 		
@@ -89,8 +87,8 @@ var loginControllerSharedInstance = nil;
 		
 		okButton = [[CPButton alloc] initWithFrame:CGRectMake(254, 105, 80, 18)];
 		[okButton setTitle:"Login"];
-	    [okButton setAction:@selector(login:)];
-	    [okButton setTarget:self];
+		[okButton setAction:@selector(login:)];
+		[okButton setTarget:self];
 		[okButton sizeToFit];
 		[contentView addSubview:okButton];
 
@@ -104,7 +102,7 @@ var loginControllerSharedInstance = nil;
 
 -(void) login:(id)sender
 {
-	var request = [CPURLRequest requestWithURL:"user/login?user_name="+encodeURIComponent([userTextField stringValue])+"&password="+encodeURIComponent([passwordTextField stringValue])];
+	var request = [CPURLRequest requestWithURL:"users/login/"+encodeURIComponent([userTextField stringValue])+"?password="+encodeURIComponent([passwordTextField stringValue])];
 	var jsObject = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
 	if(jsObject.error) {
 		[errorTextField setStringValue:jsObject.error];

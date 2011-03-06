@@ -7,8 +7,8 @@
 	CPTextField artistText;
 	CPTextField albumText;
 	CPTextField yearText;
-  int prevTrackId;
-  AppController appController;
+	int prevTrackId;
+	AppController appController;
 }
 
 - (id)initWithAppController:(AppController)controller {
@@ -18,8 +18,8 @@
 		return nil;
 	}
 	var contentView = [theWindow contentView];
-  appController = controller;
-  prevTrackId = null;
+	appController = controller;
+	prevTrackId = null;
 	
 	[theWindow setTitle:[[appController windowTitles] objectForKey:"NowPlaying"]];
 	[theWindow setFloatingPanel:YES];
@@ -65,36 +65,36 @@
 }
 
 - (void) update {
-	var request = [CPURLRequest requestWithURL:"now_playing/"];
+	var request = [CPURLRequest requestWithURL:"playing/show"];
 	var connection = [CPURLConnection connectionWithRequest:request delegate:self];
 }
 
 -(void)connection:(CPURLConnection)connection didReceiveData:(CPString)data {
-  var jsObject = [data objectFromJSON];
-  if(jsObject.message) {
-    if(prevTrackId != null) {
-      [appController updateVotesAndTopTracks];
-    }
-    [trackText setStringValue:jsObject.message];
-    [trackText setTextColor:[CPColor grayColor]];
-    [artistText setStringValue:""];
-    [albumText setStringValue:""];
-    [yearText setStringValue:""];
-    prevTrackId = null;
-  } else {
-    if(prevTrackId != jsObject.track.id) {
-      [appController updateVotesAndTopTracks];
-    }
-    [trackText setStringValue:jsObject.track.track_name];
-    [trackText setTextColor:[CPColor whiteColor]];
-    [artistText setStringValue:jsObject.track.artist_name];
-    [albumText setStringValue:jsObject.track.album_name];
-    [yearText setStringValue:jsObject.track.year];
-    prevTrackId = jsObject.track.id;
-  }
-  [trackText sizeToFit];
-  [artistText sizeToFit];
-  [albumText sizeToFit];
-  [yearText sizeToFit];
+	var jsObject = [data objectFromJSON];
+	if(jsObject.message) {
+		if(prevTrackId != null) {
+			[appController updateVotesAndTopTracks];
+		}
+		[trackText setStringValue:jsObject.message];
+		[trackText setTextColor:[CPColor grayColor]];
+		[artistText setStringValue:""];
+		[albumText setStringValue:""];
+		[yearText setStringValue:""];
+		prevTrackId = null;
+	} else {
+		if(prevTrackId != jsObject.track.id) {
+			[appController updateVotesAndTopTracks];
+		}
+		[trackText setStringValue:jsObject.track.track_name];
+		[trackText setTextColor:[CPColor whiteColor]];
+		[artistText setStringValue:jsObject.track.artist_name];
+		[albumText setStringValue:jsObject.track.album_name];
+		[yearText setStringValue:jsObject.track.year];
+		prevTrackId = jsObject.track.id;
+	}
+	[trackText sizeToFit];
+	[artistText sizeToFit];
+	[albumText sizeToFit];
+	[yearText sizeToFit];
 }
 @end
