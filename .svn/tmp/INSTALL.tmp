@@ -1,0 +1,6 @@
+<<<<<<< .mine
+apt-get install libssl libssl-dev libfltk1.1-dev fluid libglib2.0-dev libsamplerate0 libsamplerate0-dev libid3tag0 libid3tag0-dev faad ogg mpg321 expect atomicparsley libid3-3.8.3-dev
+
+gems rails composite_primary_keys=======
+apt-get install libssl libssl-dev libfltk1.1-dev fluid libglib2.0-dev libsamplerate0 libsamplerate0-dev libid3tag0 libid3tag0-dev faad ogg mpg321 expect atomicparsley libid3-3.8.3-dev rails
+>>>>>>> .r3361

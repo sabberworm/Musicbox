@@ -1,0 +1,10 @@
+Todo
+* Username in Session w/o login if cookie still valid
+* Error handling if response is not JSON should be more graceful
+* When creating votes, the voting date has to be stored to be used when ordering with MIN()
+
+Known issues
+* Playback sometimes stops shortly before the track ends ~10 seconds
+* id3 indexing library is wonky to say the least but it’s the only one I could find that handles unicode chars gracefully
+* CPTableView is an experimental version, column resizing, reordering is not yet implemented. The violet square on top of the vertical scroll bar is also an example of this.
+* Some MP3 files play at an extremely slow rate. Most likely mpg321’s fault. Filter those files or update to a working version.

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/rosa_apps/!svn/ver/3360/rosa_intra_module_webapp_musicbox/webapp/db/migrate
+END
+20090828145653_create_settings.rb
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/rosa_apps/!svn/ver/3360/rosa_intra_module_webapp_musicbox/webapp/db/migrate/20090828145653_create_settings.rb
+END
+20090828150012_create_votes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/rosa_apps/!svn/ver/3360/rosa_intra_module_webapp_musicbox/webapp/db/migrate/20090828150012_create_votes.rb
+END
+20090828145933_create_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/rosa_apps/!svn/ver/3360/rosa_intra_module_webapp_musicbox/webapp/db/migrate/20090828145933_create_users.rb
+END
+20090828145910_create_tracks.rb
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/rosa_apps/!svn/ver/3360/rosa_intra_module_webapp_musicbox/webapp/db/migrate/20090828145910_create_tracks.rb
+END

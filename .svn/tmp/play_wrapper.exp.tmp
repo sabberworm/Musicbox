@@ -1,0 +1,49 @@
+#! /usr/bin/expect
+
+source "inc/includes.tcl"
+
+set at_host [get_setting $mysql_handle at_host]
+
+while true {
+<<<<<<< .mine
+	set song_to_play [::mysql::sel $mysql_handle "SELECT tracks.id AS id, relative_path , sum(votes.vote_count) AS vote_count FROM votes JOIN tracks ON tracks.id=votes.track_id GROUP BY tracks.id ORDER BY vote_count DESC, last_played ASC, tracks.id ASC LIMIT 1;" -flatlist]
+=======
+	set song_to_play [::mysql::sel $mysql_handle "SELECT tracks.id AS id, relative_path, sum(votes.vote_count) AS vote_count FROM votes JOIN tracks ON tracks.id=votes.track_id GROUP BY tracks.id ORDER BY vote_count DESC, last_played ASC, tracks.id ASC LIMIT 1;" -flatlist]
+>>>>>>> .r3361
+	
+	if {[llength $song_to_play] == 0} {
+		#Remove votes (could be hanging votes with old IDs)
+		::mysql::exec $mysql_handle "DELETE FROM votes WHERE 1;"
+		puts "Nothing to play, wait 20 seconds"
+		sleep 20
+		continue
+	}
+
+	set track_id [lindex $song_to_play 0]
+	
+	set song_path $root_folder[lindex $song_to_play 1]
+	::mysql::exec $mysql_handle "UPDATE tracks SET is_playing = 1 where id = $track_id;"
+	
+	spawn raop_play $at_host $song_path
+	
+	while true {
+		expect "ERR: find_atom_pos" {
+			#error is non-critical, do nothing
+		} "done" {
+			#reset votes
+			::mysql::exec $mysql_handle "DELETE FROM votes WHERE track_id = $track_id;UPDATE tracks SET last_played = NOW() where id = $track_id;"
+			sleep 5
+			break
+		} "ERR: errror: auds_open" {
+			#File is not playable, path does not exist or file has wrong format -> remove it and start over
+			::mysql::exec $mysql_handle "DELETE FROM tracks WHERE id = $track_id;DELETE FROM votes WHERE track_id = $track_id;"
+			break
+		} "ERR:" {
+			puts stderr "ERROR playing file, waiting 20 seconds"
+			sleep 20
+			break
+		}
+	}
+	::mysql::exec $mysql_handle "UPDATE tracks SET is_playing = 0 where id = $track_id;"
+}
+::mysql::close $mysql_handle
