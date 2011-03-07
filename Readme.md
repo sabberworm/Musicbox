@@ -33,11 +33,21 @@ Open [http://localhost:8080]() (or whatever port you configured).
 
 ## TODO
 
-### Cappuccino
-Use CPBrowser for the song browser.
+### Web-App
+
+- Use CPBrowser for the song browser.
+- Username in Session w/o login if cookie still valid
+- Error handling if response is not JSON should be more graceful
+- When creating votes, the voting date has to be stored to be used when ordering with MIN()
 
 ### Player
 In addition to roap_play (which has not been updated in quite a while), other backends should be configurable: JustePort, Airfoil (via osascript), etc.
+
+## Known issues
+
+- With raop_play
+	- Playback sometimes stops shortly before the track ends ~10 seconds
+	- Some MP3 files play at an extremely slow rate. Most likely mpg321’s fault. Filter those files or update to a working version.
 
 ## License
 Except for the icons, which I had to buy, Musicbox is freely distributable under the terms of an MIT-style license.
