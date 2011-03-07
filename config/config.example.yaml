@@ -3,7 +3,7 @@ general:
     - "/Users/name/Music/"
     - "/Users/other/MP3s/"
   db:
-    adapter: 'mongodb' #currently the only one
+    adapter: 'mongodb' # currently the only one
     # host: localhost
     # port: 
     database: musicbox
@@ -25,11 +25,11 @@ indexer:
       executable: mdls
   types:
     ogg: ogg
-    mp4: atomicparsley
     m4a: atomicparsley
-    m4b: atomicparsley
-    m4v: atomicparsley
     mp3: mdls
+    # mp4: atomicparsley
+    # m4b: atomicparsley
+    # m4v: atomicparsley
   
 webapp:
   number_of_votes: 10
