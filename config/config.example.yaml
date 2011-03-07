@@ -9,24 +9,27 @@ general:
     database: musicbox
 
 player:
-  engine: 'raop_play' # one of raop_play, JustePort, Airfoil
+  engine: 'raop_play' # one of raop_play, juste_port, airfoil
   # executable: /usr/bin/raop_play (only if not in path/default location)
-  ip: '10.0.100.6'
+  device: '10.0.100.6'
   port: 5000
+  # password: "airport-pw" # Only in airfoil
 
 indexer:
-# interval in seconds (60*60*12 = 43200)
-  interval: 43200
+# interval in hours
+  interval: 12
   indexers:
     atomicparsley:
       executable: AtomicParsley
+    mdls:
+      executable: mdls
   types:
     ogg: ogg
     mp4: atomicparsley
     m4a: atomicparsley
     m4b: atomicparsley
     m4v: atomicparsley
-    mp3: mp3
+    mp3: mdls
   
 webapp:
   number_of_votes: 10
