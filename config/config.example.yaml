@@ -17,7 +17,7 @@ player:
 
 indexer:
 # interval in hours
-  interval: 12
+  interval: 12 # set to 0 to disable
   indexers:
     atomicparsley:
       executable: AtomicParsley
@@ -34,6 +34,6 @@ indexer:
 webapp:
   number_of_votes: 10
   port: 8080
-  session_secret: 'my_session_secret'
+  session_secret: 'my_session_secret' #change this!
   authentication: 
     module: ldap
