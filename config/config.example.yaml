@@ -17,6 +17,16 @@ player:
 indexer:
 # interval in seconds (60*60*12 = 43200)
   interval: 43200
+  indexers:
+    atomicparsley:
+      executable: AtomicParsley
+  types:
+    ogg: ogg
+    mp4: atomicparsley
+    m4a: atomicparsley
+    m4b: atomicparsley
+    m4v: atomicparsley
+    mp3: mp3
   
 webapp:
   number_of_votes: 10
