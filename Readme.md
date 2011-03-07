@@ -1,19 +1,40 @@
 Musicbox
 --------------
 
-Cappuccino Web-app that lets users vote on tracks to listen to and automatically spawns raop_play with the next top-voted track.
+Cappuccino Web-app with a node.js backend that lets users vote on tracks to listen to and automatically spawns raop_play (or another streaming player) with the next top-voted track.
 
-Currently consists of two Tcl/Expect scripts, the first of which periodically indexes the music files in a given folder while the second gets the current top-voted track and spawns raop_play.
-The web interface is Cappuccino with a Rails backend.
-All of these things keep their data in a MySQL database.
+## Requirements
+
+- One of the supported players:
+	- raop_play (needs faad for aac, mpg321 for mp3, vorbis-tools for ogg)
+		- libssl
+		- libssl-dev
+		- libfltk1.1-dev
+		- libfltk1.1c102
+		- fluid,libglib2.0-dev
+		- libsamplerate0
+		- libsamplerate0-dev
+		- libid3tag0
+		- libid3tag0-dev
+	- JustePort
+	- Airfoil
+- Metadata parser
+
+
+## Running
+
+Clone or download Musicbox and `cd` to it.
+
+    mv config/config.example.yaml config/config.yaml
+    vi config/config.yaml
+    node musicbox.js
+
+Open [http://localhost:8080]() (or whatever port you configured).
 
 ## TODO
 
-### Node.js
-The plan is to combine the Expect scripts as well as the Rails-Backend into one Node.js app.
-
 ### Cappuccino
-Also, the Cappuccino version used is incredibly outdated and, in fact, I used the unfinished CPTableView class from an unstable branch. Bump to 0.9 and use CPBrowser for the song browser.
+Use CPBrowser for the song browser.
 
 ### Player
 In addition to roap_play (which has not been updated in quite a while), other backends should be configurable: JustePort, Airfoil (via osascript), etc.
