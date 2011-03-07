@@ -33,7 +33,7 @@
 - (int)numberOfRowsInTableView:(CPTableView)tableView {
   if(!albumCount) {
     var request = [CPURLRequest requestWithURL:"music/album_count"+(artistName ? "?artist_name="+encodeURIComponent(artistName) : "")];
-    var jsObject = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
+    var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
     albumCount = jsObject.count;
   }
   return albumCount+(artistName ? 1 : 0);
@@ -90,7 +90,7 @@
   frame.size.height -= 26;
   var title = "Tracks"+(artistName ? " by "+artistName : "")+(albumName ? " on "+albumName : "");
   var request = [CPURLRequest requestWithURL:"music/tracks?"+(artistName ? "&artist_name="+encodeURIComponent(artistName) : "")+(albumName ? "&album_name="+encodeURIComponent(albumName) : "")];
-  var tracks = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
+  var tracks = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
   tracks = [CPArray arrayWithObjects:tracks count:tracks.length];
   var trackListWindow = [[TrackListController alloc] initWithAppController:appController andTracks:tracks andFrame:frame andTitle:title withVotesColumn:NO];
   [trackListWindow showWindow:self];

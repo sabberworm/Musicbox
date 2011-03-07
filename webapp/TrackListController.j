@@ -116,7 +116,7 @@
   [trackView deselectRow:row];
   [trackView setNeedsLayout];
 	var request = [CPURLRequest requestWithURL:"my_votes/add?user_name="+[appController userName]+"&track_id="+[self trackByOffset:row].id];
-  var vote_success = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string).added;
+  var vote_success = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject().added;
   if(vote_success) {
     [appController updateVotesAndTopTracks];
   }

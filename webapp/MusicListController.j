@@ -33,7 +33,7 @@
 - (int)numberOfRowsInTableView:(CPTableView)tableView {
   if(!artistCount) {
     var request = [CPURLRequest requestWithURL:"music/artist_count"];
-    var jsObject = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
+    var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
     artistCount = jsObject.count;
   }
   return artistCount+1;
@@ -52,7 +52,7 @@
   var storedArtistField = Math.floor(offset/storeLength);
   if([storedArtists objectForKey:storedArtistField] === null) {
     var request = [CPURLRequest requestWithURL:"music/artists?start="+storedArtistField*storeLength+"&length="+storeLength];
-    var jsObject = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
+    var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
     [storedArtists setObject:[CPArray arrayWithObjects:jsObject count:jsObject.length] forKey:storedArtistField];
   }
   return [[storedArtists objectForKey:storedArtistField] objectAtIndex:offset%storeLength].track.artist_name;

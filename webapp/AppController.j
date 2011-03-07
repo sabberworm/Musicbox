@@ -95,7 +95,7 @@
   
   var request = [CPURLRequest requestWithURL:"music/next_tracks"];
   if(currentTopTracks == null) {
-    var tracks = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
+    var tracks = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
     currentTopTracks = [[TrackListController alloc] initWithAppController:self andTracks:tracks andFrame:CGRectMake(10, 500, 300, 300) andTitle:[[self windowTitles] objectForKey:"CurrentTopTracks"] withVotesColumn:YES];
   } else {
     var connection = [CPURLConnection connectionWithRequest:request delegate:currentTopTracks];
