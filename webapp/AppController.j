@@ -22,6 +22,7 @@
 	TrackListController currentTopTracks @accessors;
 	CPString userName @accessors;
 	CPDictionary windowTitles @accessors;
+	CPTextField nameLabel @accessors;
 }
 
 - (void)applicationDidFinishLaunching:(CPNotification)aNotification
@@ -57,6 +58,11 @@
 	[boxLabel setFont:[CPFont systemFontOfSize:24]];
 	[boxLabel sizeToFit];
 	[contentView addSubview: boxLabel];
+
+	nameLabel = [[CPTextField alloc] initWithFrame:CGRectMake([boxLabel frame].size.width+2, 0, 255, 30)];
+	[nameLabel setTextColor:[CPColor colorWithHexString:"343434"]];
+	[nameLabel setFont:[CPFont systemFontOfSize:24]];
+	[contentView addSubview: boxLabel];
 	
 	[theWindow orderFront:self];
 	
@@ -69,9 +75,15 @@
 	
   currentTopTracks = null;
   allMusicWindow = null;
-		
-	var loginController = [LoginController sharedLoginController];
-	[loginController showLoginWindow:self];
+	
+	var request = [CPURLRequest requestWithURL:"users/test"];
+	var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
+	if(jsObject.login) {
+		[self login:jsObject.login];
+	} else {
+		var loginController = [LoginController sharedLoginController];
+		[loginController showLoginWindow:self];
+	}
 }
 
 - (void)updateNowPlaying {
@@ -80,6 +92,8 @@
 
 - (void)login:(CPString)user {
 	userName = user;
+	[nameLabel setStringValue:userName];
+	[nameLabel sizeToFit];
   [myVotesWindow showWindow:self];
 	[myVotesWindow activate];
 	

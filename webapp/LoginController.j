@@ -91,6 +91,7 @@ var loginControllerSharedInstance = nil;
 		[okButton setTarget:self];
 		[okButton sizeToFit];
 		[contentView addSubview:okButton];
+		[theWindow setDefaultButton:okButton];
 
 		errorTextField = [[CPTextField alloc] initWithFrame:CGRectMake(10, 128, 320, 24)];
 		[errorTextField setTextColor:[CPColor redColor]];
