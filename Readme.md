@@ -29,7 +29,7 @@ Clone or download Musicbox and `cd` to it.
     vi config/config.yaml
     node musicbox.js
 
-Open [http://localhost:8080]() (or whatever port you configured).
+Open [http://localhost:8080](http://localhost:8080) (or whatever port you configured).
 
 ## TODO
 
