@@ -51,7 +51,7 @@
   var storeLength = 20;
   var storedArtistField = Math.floor(offset/storeLength);
   if([storedArtists objectForKey:storedArtistField] === null) {
-    var request = [CPURLRequest requestWithURL:"music/artists?start="+storedArtistField*storeLength+"&length="+storeLength];
+    var request = [CPURLRequest requestWithURL:"music/artists/"+storedArtistField*storeLength+"/"+storeLength];
     var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
     [storedArtists setObject:[CPArray arrayWithObjects:jsObject count:jsObject.length] forKey:storedArtistField];
   }

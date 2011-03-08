@@ -47,12 +47,12 @@
 }
 
 - (void) update {
-	var request = [CPURLRequest requestWithURL:"my_votes/show_votes?user_name="+[appController userName]];
+	var request = [CPURLRequest requestWithURL:"votes/show"];
 	var connection = [CPURLConnection connectionWithRequest:request delegate:self];
 }
 
 - (void) resetVotes {
-	var request = [CPURLRequest requestWithURL:"my_votes/reset?user_name="+[appController userName]];
+	var request = [CPURLRequest requestWithURL:"votes/reset"];
 	var response, error;
 	var connection = [CPURLConnection sendSynchronousRequest:request returningResponse:response error:error];
 	[appController updateVotesAndTopTracks];
@@ -60,7 +60,7 @@
 
 -(void)connection:(CPURLConnection)connection didReceiveData:(CPString)data {
 	var jsObject = [data objectFromJSON];
-	[votesText setStringValue:jsObject.vote_count];
+	[votesText setStringValue:""+jsObject.count];
 	[votesText sizeToFit];
 }
 

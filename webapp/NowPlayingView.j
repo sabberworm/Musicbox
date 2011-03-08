@@ -82,7 +82,7 @@
 		[yearText setStringValue:""];
 		prevTrackId = null;
 	} else {
-		if(prevTrackId != jsObject.track.id) {
+		if(prevTrackId != jsObject.track._id) {
 			[appController updateVotesAndTopTracks];
 		}
 		[trackText setStringValue:jsObject.track.track_name];
@@ -90,7 +90,7 @@
 		[artistText setStringValue:jsObject.track.artist_name];
 		[albumText setStringValue:jsObject.track.album_name];
 		[yearText setStringValue:jsObject.track.year];
-		prevTrackId = jsObject.track.id;
+		prevTrackId = jsObject.track._id;
 	}
 	[trackText sizeToFit];
 	[artistText sizeToFit];
