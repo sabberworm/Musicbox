@@ -36,7 +36,8 @@
 		AllMusic: "Available Music",
 		CurrentTopTracks: "Current Playlist",
 		NowPlaying: "Now Playing",
-		Albums: "All Albums"
+		Albums: "All Albums",
+		Logout: "Logout"
 	}]
 	
 	var toolbar = [[CPToolbar alloc] initWithIdentifier:"Main"];
@@ -59,10 +60,10 @@
 	[boxLabel sizeToFit];
 	[contentView addSubview: boxLabel];
 
-	nameLabel = [[CPTextField alloc] initWithFrame:CGRectMake([boxLabel frame].size.width+2, 0, 255, 30)];
-	[nameLabel setTextColor:[CPColor colorWithHexString:"343434"]];
+	nameLabel = [[CPTextField alloc] initWithFrame:CGRectMake([boxLabel frame].origin.x+[boxLabel frame].size.width+2, 0, 255, 30)];
+	[nameLabel setTextColor:[CPColor colorWithHexString:"666666"]];
 	[nameLabel setFont:[CPFont systemFontOfSize:24]];
-	[contentView addSubview: boxLabel];
+	[contentView addSubview: nameLabel];
 	
 	[theWindow orderFront:self];
 	
@@ -92,7 +93,7 @@
 
 - (void)login:(CPString)user {
 	userName = user;
-	[nameLabel setStringValue:userName];
+	[nameLabel setStringValue:user];
 	[nameLabel sizeToFit];
   [myVotesWindow showWindow:self];
 	[myVotesWindow activate];
