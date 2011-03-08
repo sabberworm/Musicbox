@@ -8,7 +8,7 @@
 
 - (id)initWithAppController:(AppController)controller {
 	appController = controller;
-  toolbarItems = [CPArray arrayWithObjects:['MyVotes', 'NowPlaying', 'CurrentTopTracks', 'AllMusic'] count:4];
+  toolbarItems = [CPArray arrayWithObjects:['AllMusic', CPToolbarFlexibleSpaceItemIdentifier, 'CurrentTopTracks', 'MyVotes', CPToolbarSeparatorItemIdentifier, 'NowPlaying'] count:4];
 	self = [super init];
 	return self
 }
