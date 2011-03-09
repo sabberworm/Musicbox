@@ -1,93 +1,98 @@
 /*
- * Jakefile
- * Musicbox
- *
- * Created by You on March 9, 2011.
- * Copyright 2011, Your Company All rights reserved.
- */
+* Jakefile
+* Musicbox
+*
+* Created by You on March 9, 2011.
+* Copyright 2011, Your Company All rights reserved.
+*/
 
 var ENV = require("system").env,
-    FILE = require("file"),
-    JAKE = require("jake"),
-    task = JAKE.task,
-    FileList = JAKE.FileList,
-    app = require("cappuccino/jake").app,
-    configuration = ENV["CONFIG"] || ENV["CONFIGURATION"] || ENV["c"] || "Debug",
-    OS = require("os");
+	FILE = require("file"),
+	JAKE = require("jake"),
+	task = JAKE.task,
+	FileList = JAKE.FileList,
+	app = require("cappuccino/jake").app,
+	configuration = ENV["CONFIG"] || ENV["CONFIGURATION"] || ENV["c"] || "Debug",
+	OS = require("os");
 
 app ("musicbox", function(task)
 {
-    task.setBuildIntermediatesPath(FILE.join("Build", "musicbox.build", configuration));
-    task.setBuildPath(FILE.join("Build", configuration));
+	task.setBuildIntermediatesPath(FILE.join("Build", "musicbox.build", configuration));
+	task.setBuildPath(FILE.join("Build", configuration));
 
-    task.setProductName("musicbox");
-    task.setIdentifier("com.sabberworm.musicbox");
-    task.setVersion("1.0");
-    task.setAuthor("sabberworm");
-    task.setEmail("feedback @nospam@ yourcompany.com");
-    task.setSummary("Cappuccino web app to help a group of people decide what to listen to");
-    task.setSources((new FileList("**/*.j")).exclude(FILE.join("Build", "**")));
-    task.setResources(new FileList("Resources/**"));
-    task.setIndexFilePath("index.html");
-    task.setInfoPlistPath("Info.plist");
+	task.setProductName("musicbox");
+	task.setIdentifier("com.sabberworm.musicbox");
+	task.setVersion("1.0");
+	task.setAuthor("sabberworm");
+	task.setEmail("feedback @nospam@ yourcompany.com");
+	task.setSummary("Cappuccino web app to help a group of people decide what to listen to");
+	task.setSources((new FileList("**/*.j")).exclude(FILE.join("Build", "**")));
+	task.setResources(new FileList("Resources/**"));
+	task.setIndexFilePath("index.html");
+	task.setInfoPlistPath("Info.plist");
 
-    if (configuration === "Debug")
-        task.setCompilerFlags("-DDEBUG -g");
-    else
-        task.setCompilerFlags("-O");
+	if (configuration === "Debug")
+		task.setCompilerFlags("-DDEBUG -g");
+	else
+		task.setCompilerFlags("-O");
 });
 
 task ("default", ["musicbox"], function()
 {
-    printResults(configuration);
+	printResults(configuration);
 });
 
 task ("build", ["default"]);
 
 task ("debug", function()
 {
-    ENV["CONFIGURATION"] = "Debug";
-    JAKE.subjake(["."], "build", ENV);
+	ENV["CONFIGURATION"] = "Debug";
+	JAKE.subjake(["."], "build", ENV);
 });
 
 task ("release", function()
 {
-    ENV["CONFIGURATION"] = "Release";
-    JAKE.subjake(["."], "build", ENV);
+	ENV["CONFIGURATION"] = "Release";
+	JAKE.subjake(["."], "build", ENV);
 });
 
-task ("run", ["debug"], function()
+task ("compile", ["debug"], function()
 {
-    OS.system(["open", FILE.join("Build", "Debug", "musicbox", "index.html")]);
+	OS.system(["cp", '-R', FILE.join("Build", "Debug", "musicbox"), FILE.join('..', 'webapp_debug')]);
+});
+
+task ("compile-release", ["release"], function()
+{
+	OS.system(["cp", '-R', FILE.join("Build", "Release", "musicbox"), FILE.join('..', 'webapp_release')]);
 });
 
 task ("run-release", ["release"], function()
 {
-    OS.system(["open", FILE.join("Build", "Release", "musicbox", "index.html")]);
+	OS.system(["open", FILE.join("Build", "Release", "musicbox", "index.html")]);
 });
 
 task ("deploy", ["release"], function()
 {
-    FILE.mkdirs(FILE.join("Build", "Deployment", "musicbox"));
-    OS.system(["press", "-f", FILE.join("Build", "Release", "musicbox"), FILE.join("Build", "Deployment", "musicbox")]);
-    printResults("Deployment")
+	FILE.mkdirs(FILE.join("Build", "Deployment", "musicbox"));
+	OS.system(["press", "-f", FILE.join("Build", "Release", "musicbox"), FILE.join("Build", "Deployment", "musicbox")]);
+	printResults("Deployment")
 });
 
 task ("desktop", ["release"], function()
 {
-    FILE.mkdirs(FILE.join("Build", "Desktop", "musicbox"));
-    require("cappuccino/nativehost").buildNativeHost(FILE.join("Build", "Release", "musicbox"), FILE.join("Build", "Desktop", "musicbox", "musicbox.app"));
-    printResults("Desktop")
+	FILE.mkdirs(FILE.join("Build", "Desktop", "musicbox"));
+	require("cappuccino/nativehost").buildNativeHost(FILE.join("Build", "Release", "musicbox"), FILE.join("Build", "Desktop", "musicbox", "musicbox.app"));
+	printResults("Desktop")
 });
 
 task ("run-desktop", ["desktop"], function()
 {
-    OS.system([FILE.join("Build", "Desktop", "musicbox", "musicbox.app", "Contents", "MacOS", "NativeHost"), "-i"]);
+	OS.system([FILE.join("Build", "Desktop", "musicbox", "musicbox.app", "Contents", "MacOS", "NativeHost"), "-i"]);
 });
 
 function printResults(configuration)
 {
-    print("----------------------------");
-    print(configuration+" app built at path: "+FILE.join("Build", configuration, "musicbox"));
-    print("----------------------------");
+	print("----------------------------");
+	print(configuration+" app built at path: "+FILE.join("Build", configuration, "musicbox"));
+	print("----------------------------");
 }
