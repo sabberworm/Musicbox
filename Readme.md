@@ -4,7 +4,12 @@ Musicbox
 Cappuccino Web-app with a node.js backend that lets users vote on tracks to listen to and automatically spawns raop_play (or another streaming player) with the next top-voted track.
 
 ## Requirements
-
+- node.js
+- npm packages
+	- connect
+	- yaml
+	- mongodb
+	- finder
 - One of the supported players:
 	- raop_play (needs faad for aac, mpg321 for mp3, vorbis-tools for ogg)
 		- libssl
@@ -19,6 +24,9 @@ Cappuccino Web-app with a node.js backend that lets users vote on tracks to list
 	- JustePort
 	- Airfoil
 - Metadata parser
+	- AtomicParsley for mp4
+	- mdls for mp4 or mp3
+	- vorbis-tools for ogg
 
 
 ## Running
