@@ -23,8 +23,10 @@ indexer:
       executable: AtomicParsley
     mdls:
       executable: mdls
+    vorbiscomment:
+      executable: vorbiscomment
   types:
-    ogg: ogg
+    ogg: vorbiscomment
     m4a: atomicparsley
     mp3: mdls
     # mp4: atomicparsley
