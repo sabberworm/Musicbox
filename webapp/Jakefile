@@ -24,7 +24,7 @@ app ("musicbox", function(task)
 	task.setIdentifier("com.sabberworm.musicbox");
 	task.setVersion("1.0");
 	task.setAuthor("sabberworm");
-	task.setEmail("feedback @nospam@ yourcompany.com");
+	task.setEmail("musicbox @nospam@ sabberworm.com");
 	task.setSummary("Cappuccino web app to help a group of people decide what to listen to");
 	task.setSources((new FileList("**/*.j")).exclude(FILE.join("Build", "**")));
 	task.setResources(new FileList("Resources/**"));

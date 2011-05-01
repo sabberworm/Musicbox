@@ -10,6 +10,7 @@ Cappuccino Web-app with a node.js backend that lets users vote on tracks to list
 	- yaml
 	- mongodb
 	- finder
+- Cappuccino-Jake to compile the webapp (for speed)
 - One of the supported players:
 	- raop_play (needs faad for aac, mpg321 for mp3, vorbis-tools for ogg)
 		- libssl
@@ -35,6 +36,7 @@ Clone or download Musicbox and `cd` to it.
 
     mv config/config.example.yaml config/config.yaml
     vi config/config.yaml
+    cd webapp; jake compile-release; cd ..
     node musicbox.js
 
 Open [http://localhost:8080](http://localhost:8080) (or whatever port you configured).
