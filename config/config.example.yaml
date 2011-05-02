@@ -1,7 +1,7 @@
 general:
   music_dirs:
     - "/Users/name/Music/"
-    - "/Users/other/MP3s/"
+    - "/some/other/MP3s/"
   db:
     adapter: 'mongodb' # currently the only one
     # host: localhost
@@ -9,7 +9,7 @@ general:
     database: musicbox
 
 player:
-  engine: 'raop_play' # one of raop_play, juste_port, airfoil
+  engine: 'raop_play' # one of raop_play, juste_port, airfoil, simple_open, null (for testing and debugging)
   # executable: /usr/bin/raop_play (only if not in path/default location)
   device: '10.0.100.6'
   port: 5000
