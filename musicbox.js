@@ -5,7 +5,7 @@ var fs = require('fs'),
 fs.readFile('./config/config.yaml', function(err, data) {
 	var settings = {};
 	if (err) {
-		sys.puts('No settings.json found ('+err+'). Using default settings');
+		sys.puts('No settings.json found ('+err+'). Aborting');
 	} else {
 		try {
 			settings = yaml.eval(data.toString('utf8',0,data.length));
