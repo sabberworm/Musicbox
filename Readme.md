@@ -1,6 +1,8 @@
 Musicbox
 --------------
 
+*Note: Development currently happens in the node.js-rework branch*
+
 Cappuccino Web-app that lets users vote on tracks to listen to and automatically spawns raop_play with the next top-voted track.
 
 Currently consists of two Tcl/Expect scripts, the first of which periodically indexes the music files in a given folder while the second gets the current top-voted track and spawns raop_play.
