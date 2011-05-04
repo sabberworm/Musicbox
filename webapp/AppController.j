@@ -78,7 +78,7 @@
   allMusicWindow = null;
 	
 	var request = [CPURLRequest requestWithURL:"users/test"];
-	var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
+	var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject();
 	if(jsObject.login) {
 		[self login:jsObject.login];
 	} else {
@@ -110,7 +110,7 @@
   
   var request = [CPURLRequest requestWithURL:"music/next_tracks"];
   if(currentTopTracks == null) {
-    var tracks = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
+    var tracks = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject();
     currentTopTracks = [[TrackListController alloc] initWithAppController:self andTracks:tracks andFrame:CGRectMake(10, 500, 300, 300) andTitle:[[self windowTitles] objectForKey:"CurrentTopTracks"] withVotesColumn:YES];
   } else {
     var connection = [CPURLConnection connectionWithRequest:request delegate:currentTopTracks];

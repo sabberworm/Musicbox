@@ -77,16 +77,16 @@
 		return track.track_number;
 	}
 	if ([tableColumn identifier] == "artist") {
-		return track.artist_name;
+		return track.artist;
 	}
 	if ([tableColumn identifier] == "album") {
-		return track.album_name;
+		return track.album;
 	}
-	return track.track_name;
+	return track.name;
 }
 
 - (CPString)trackByOffset:(int)offset {
-	return [trackList objectAtIndex:offset].track;
+	return [trackList objectAtIndex:offset];
 }
 
 - (id)tableView:(CPTableView)tableView heightOfRow:(int)row {
@@ -99,7 +99,7 @@
 
 -(void)connection:(CPURLConnection)connection didReceiveData:(CPString)data {
 	var jsObject = [data objectFromJSON];
-	trackList = jsObject;
+	trackList = jsObject.tracks;
 	[self updateList];
 }
 
@@ -115,8 +115,8 @@
 	//Remove selection
 	[trackView deselectRow:row];
 	[trackView setNeedsLayout];
-	var request = [CPURLRequest requestWithURL:"my_votes/add/"+[self trackByOffset:row]._id];
-	var vote_success = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject().added;
+	var request = [CPURLRequest requestWithURL:"votes/add/"+[self trackByOffset:row]._id];
+	var vote_success = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject().success;
 	if(vote_success) {
 		[appController updateVotesAndTopTracks];
 	}

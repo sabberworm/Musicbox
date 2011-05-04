@@ -33,7 +33,7 @@
 - (int)numberOfRowsInTableView:(CPTableView)tableView {
   if(!albumCount) {
     var request = [CPURLRequest requestWithURL:"music/album_count"+(artistName ? "?artist_name="+encodeURIComponent(artistName) : "")];
-    var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
+    var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject();
     albumCount = jsObject.count;
   }
   return albumCount+(artistName ? 1 : 0);
@@ -53,11 +53,11 @@
   var storeLength = 20;
   var storedAlbumField = Math.floor(offset/storeLength);
   if([storedAlbums objectForKey:storedAlbumField] === null) {
-    var request = [CPURLRequest requestWithURL:"music/albums?start="+storedAlbumField*storeLength+"&length="+storeLength+(artistName ? "&artist_name="+encodeURIComponent(artistName) : "")];
-    var jsObject = CPJSObjectCreateWithJSON([CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].string);
-    [storedAlbums setObject:[CPArray arrayWithObjects:jsObject count:jsObject.length] forKey:storedAlbumField];
+    var request = [CPURLRequest requestWithURL:"music/albums/"+storedAlbumField*storeLength+"/"+storeLength+(artistName ? "?artist_name="+encodeURIComponent(artistName) : "")];
+    var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject();
+    [storedAlbums setObject:[CPArray arrayWithObjects:jsObject.albums count:jsObject.albums.length] forKey:storedAlbumField];
   }
-  return [[storedAlbums objectForKey:storedAlbumField] objectAtIndex:offset%storeLength].track.album_name;
+  return [[storedAlbums objectForKey:storedAlbumField] objectAtIndex:offset%storeLength];
 }
 
 - (id)tableView:(CPTableView)tableView heightOfRow:(int)row {
@@ -90,8 +90,8 @@
   frame.size.height -= 26;
   var title = "Tracks"+(artistName ? " by "+artistName : "")+(albumName ? " on "+albumName : "");
   var request = [CPURLRequest requestWithURL:"music/tracks?"+(artistName ? "&artist_name="+encodeURIComponent(artistName) : "")+(albumName ? "&album_name="+encodeURIComponent(albumName) : "")];
-  var tracks = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
-  tracks = [CPArray arrayWithObjects:tracks count:tracks.length];
+  var tracks = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject();
+  tracks = [CPArray arrayWithObjects:tracks.tracks count:tracks.tracks.length];
   var trackListWindow = [[TrackListController alloc] initWithAppController:appController andTracks:tracks andFrame:frame andTitle:title withVotesColumn:NO];
   [trackListWindow showWindow:self];
 }

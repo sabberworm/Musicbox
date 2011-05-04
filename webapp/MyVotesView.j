@@ -22,8 +22,9 @@
 	
 	var votesLabel = [CPTextField hudLabelWithTitle:"Votes left:"];
 	[votesLabel setFrameOrigin:CGPointMake(40, 30)];
-	var votesText = [CPTextField hudLabelWithTitle:"unknown"];
+	votesText = [CPTextField hudLabelWithTitle:"unknown"];
 	[votesText setFrameOrigin:CGPointMake(120, 30)];
+	[votesText sizeToFit];
 	
 	resetButton = [[CPButton alloc] initWithFrame:CGRectMake(40, 60, 0, 0)];
 	[resetButton setTitle:"Reset My Votes"];

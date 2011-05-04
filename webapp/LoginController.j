@@ -104,7 +104,7 @@ var loginControllerSharedInstance = nil;
 -(void) login:(id)sender
 {
 	var request = [CPURLRequest requestWithURL:"users/login/"+encodeURIComponent([userTextField stringValue])+"?password="+encodeURIComponent([passwordTextField stringValue])];
-	var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil error:nil].JSONObject();
+	var jsObject = [CPURLConnection sendSynchronousRequest:request returningResponse:nil].JSONObject();
 	if(jsObject.error) {
 		[errorTextField setStringValue:jsObject.error];
 	} else if(jsObject.login) {
