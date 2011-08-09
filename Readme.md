@@ -43,6 +43,10 @@ Open [http://localhost:8080](http://localhost:8080) (or whatever port you config
 
 ## TODO
 
+### General
+
+- Use mongoose wrapper instead of using node-mongodb-native directly
+
 ### Web-App
 
 - Use CPBrowser for the song browser.
