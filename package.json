@@ -1,0 +1,23 @@
+{
+	"name": "musicbox",
+	"description": "Cappuccino web app to help a group of people decide what to listen to.",
+	"version": "0.1.0",
+	"author": "Raphael Schweikert <any@sabberworm.com>",
+	"keywords": ["music", "streaming", "votes"],
+	"repositories": [
+	{
+			"type": "git",
+			"url": "git://github.com/sabberworm/Musicbox.git"
+	}
+	],
+	"dependencies": {
+		"connect": "*",
+		"finder": ">= 0.1.3-1",
+		"mongodb": ">= 0.1.3-1",
+		"yaml": "*"
+	},
+	"optionalDependencies": {
+		"ansi-color": "*"
+	},
+  "main": "musicbox"
+}
