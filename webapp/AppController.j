@@ -9,16 +9,16 @@
 @import <Foundation/CPObject.j>
 @import "NowPlayingView.j"
 @import "MusicListController.j"
+@import "MusicViewController.j"
 @import "MyVotesView.j"
 @import "LoginController.j"
-@import "MainToolbarDelegate.j"
 @import "TrackListController.j"
 
 @implementation AppController : CPObject
 {
 	NowPlayingView nowPlayingWindow @accessors;
 	MyVotesView myVotesWindow @accessors;
-	MusicListController allMusicWindow @accessors;
+	MusicViewController allMusicWindow @accessors;
 	TrackListController currentTopTracks @accessors;
 	CPString userName @accessors;
 	CPDictionary windowTitles @accessors;
@@ -40,12 +40,6 @@
 		Logout: "Logout"
 	}]
 	
-	var toolbar = [[CPToolbar alloc] initWithIdentifier:"Main"];
-	var toolbarDelegate = [[MainToolbarDelegate alloc] initWithAppController:self];
-	[toolbar setDelegate:toolbarDelegate];
-	[toolbar setVisible:YES];
-	[theWindow setToolbar: toolbar];
-
 	var rosaLabel = [[CPTextField alloc] initWithFrame:CGRectMake(0, 0, 255, 30)];
 	[rosaLabel setStringValue:"Internal"];
 	[rosaLabel setTextColor:[CPColor colorWithHexString:"FF99CC"]];
@@ -99,7 +93,8 @@
 	[myVotesWindow activate];
 	
 	//Show late to avoid the long load
-  allMusicWindow = [[MusicListController alloc] initWithAppController:self];
+  allMusicWindow = [[MusicViewController alloc] initWithAppController:self];
+  // allMusicWindow = [[MusicListController alloc] initWithAppController:self];
   [allMusicWindow showWindow:self];
 }
 

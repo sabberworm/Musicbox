@@ -4,6 +4,7 @@
 @import <AppKit/CPTableColumn.j>
 @import <AppKit/CPScrollView.j>
 @import "Additions.j"
+@import "MainToolbarDelegate.j"
 @import "AlbumListController.j"
 
 @implementation MusicListController : CPWindowController {
@@ -24,7 +25,7 @@
 	storedArtists = [[CPMutableDictionary alloc] init];
 	
 	[theWindow setTitle:[[appController windowTitles] objectForKey:"AllMusic"]];
-	
+		
 	artistView = [self setUpTableViewWithFirstColumn:"Artist"];
 
 	return self;
